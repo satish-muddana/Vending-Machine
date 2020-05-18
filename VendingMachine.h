@@ -90,7 +90,6 @@ void VendingMachine::initialize() {
         adminUser = false;
         userInitialize();
     }
-    
     return;
 }
 
