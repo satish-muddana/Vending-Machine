@@ -145,8 +145,9 @@ void ProductCatalog::updateProduct(int productId, int productQuantity) {
 void ProductCatalog::updateCatalog(map<int, int>& currMapProducts) {
     map<int, int>::iterator iter;
     for (iter = currMapProducts.begin(); iter != currMapProducts.end(); iter++) {
-        if (productCnt.find(iter->first) != productCnt.end())
+        if (productCnt.find(iter->first) != productCnt.end()) {
             productCnt[iter->first] += iter->second;
+        }
     }
     return;
 }

@@ -389,7 +389,6 @@ int VendingMachine::checkOut() {
         Product* currProduct = prodCat->getProduct(iter->first);
         totalPrice += currProduct->getProductPrice() * iter->second;
     }
-    myCart->emptyCart();
     return totalPrice;
 }
 
@@ -426,15 +425,16 @@ void VendingMachine::resetMachine() {
 }
 
 void VendingMachine::enterCash(int totalPrice) {
-    int denominationValue = 0;
+    int denominationFlag = 0;
     string flag = "";
     int enteredPrice = 0;
     string denominationType = "";
     int inputVal = 0;
+    int denominationQuantity = 0;
 
     while (true) {
         flag = "";
-        denominationValue = 0;
+        denominationFlag = 0;
         paymentOptions();
         cin >> flag;
 
@@ -447,8 +447,10 @@ void VendingMachine::enterCash(int totalPrice) {
 
         if (inputVal == 1) {
             denominationOptions();
-            cin >> denominationValue;
-            denominationType = denCat->getDenominationType(denominationValue);
+            cin >> denominationFlag;
+            cout << "Enter Denomination Quantity" << endl;
+            cin >> denominationQuantity;
+            denominationType = denCat->getDenominationType(denominationFlag);
             denCat->addDenomination(denominationType);
             enteredPrice += denCat->getDenominationValue(denominationType);
             std::cout << endl;
