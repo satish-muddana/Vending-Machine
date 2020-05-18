@@ -292,11 +292,15 @@ void VendingMachine::processTransaction(int refundPrice) {
         return;
     }
     myCart->emptyCart();
+    cout << endl;
+    std::cout << "***************************************" << endl;
     if (refundPrice > 0) {
         std::cout << "PLEASE COLLECT THE CHANGE: " << (double)refundPrice/100 << " USD" << endl;
     }
+
     std::cout << "YOUR TRANSACTION IS SUCCESSFULL." << endl;
     std::cout << "PLEASE COLLECT YOUR ITEMS." << endl;
+    std::cout << "***************************************" << endl;
     initialize();
     return;
 }
