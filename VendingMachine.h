@@ -71,7 +71,7 @@ VendingMachine::~VendingMachine() {
 void VendingMachine::userOptions() {
     std::cout << "USER OPTIONS:" << endl;
     std::cout << " 1        --> ADMIN ACCESS." << endl;
-    std::cout << " ANY KEY  --> USER ACCESS." << endl;
+    std::cout << " 2        --> USER ACCESS." << endl;
     std::cout << endl;
     std::cout << "YOUR INPUT : ";
 }
@@ -79,16 +79,20 @@ void VendingMachine::userOptions() {
 void VendingMachine::initialize() {
     std::cout << endl;
     userOptions();
-    int input = 0;
+    char input = 0;
     cin >> input;
-    if (input == 1) {
+    if (input == '1') {
         adminUser = true;
         adminInitialize();
         initialize();
     }
-    else {
+    else if (input == '2') {
         adminUser = false;
         userInitialize();
+    }
+    else {
+        cout << "SELECT CORRECT OPTION" << endl;
+        initialize();
     }
     return;
 }
