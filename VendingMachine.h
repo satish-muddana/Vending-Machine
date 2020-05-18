@@ -435,6 +435,7 @@ void VendingMachine::enterCash(int totalPrice) {
     while (true) {
         flag = "";
         denominationFlag = 0;
+        denominationQuantity = 0;
         paymentOptions();
         cin >> flag;
 
@@ -448,11 +449,12 @@ void VendingMachine::enterCash(int totalPrice) {
         if (inputVal == 1) {
             denominationOptions();
             cin >> denominationFlag;
-            cout << "Enter Denomination Quantity" << endl;
+            cout << endl;
+            cout << "Enter Denomination Quantity : ";
             cin >> denominationQuantity;
             denominationType = denCat->getDenominationType(denominationFlag);
-            denCat->addDenomination(denominationType);
-            enteredPrice += denCat->getDenominationValue(denominationType);
+            denCat->addDenomination(denominationType, denominationQuantity);
+            enteredPrice += denCat->getDenominationValue(denominationType) * denominationQuantity;
             std::cout << endl;
             std::cout << "TOTAL AMOUNT ENTERED : " << (double)enteredPrice/100 << " USD" << endl;
             std::cout << endl;

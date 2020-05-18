@@ -19,7 +19,7 @@ class DenominationCatalog {
         void removeDenominations(int, int);
         void emptyDenominations();
         vector<string> getAvailableDenominations();
-        void addDenomination(string);
+        void addDenomination(string, int);
         int getDenominationValue(string);
         void emptyCatalog();
         int getNumDenominations(string);
@@ -141,8 +141,8 @@ void DenominationCatalog::removeDenominations(int denominationFlag, int denomina
     return;
 }
 
-void DenominationCatalog::addDenomination(string denominationType) {
-    mapDenominations[denominationType] += 1;
+void DenominationCatalog::addDenomination(string denominationType, int denominationQuantity) {
+    mapDenominations[denominationType] += denominationQuantity;
     return;
 }
 
