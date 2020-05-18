@@ -79,14 +79,14 @@ void VendingMachine::userOptions() {
 void VendingMachine::initialize() {
     std::cout << endl;
     userOptions();
-    char input = 0;
+    string input = "";
     cin >> input;
-    if (input == '1') {
+    if (input == "1") {
         adminUser = true;
         adminInitialize();
         initialize();
     }
-    else if (input == '2') {
+    else if (input == "2") {
         adminUser = false;
         userInitialize();
     }
@@ -102,14 +102,19 @@ void VendingMachine::displayProducts() {
 }
 
 void VendingMachine::adminInitialize() {
-    int input = 0;
-    while (true) {
+    string input = "";
+    bool optionsFlag = true;
+    while (optionsFlag) {
         cartOptions();
         cin >> input;
-        if (input < 1 || input > 10) {
-            break;
+        int inputVal = 0;
+        try {
+            inputVal = stoi(input);
         }
-        switch(input) {
+        catch (...){
+            inputVal = 0;
+        }
+        switch(inputVal) {
             case 1:
                 addProductsToCatalog();
                 break;
@@ -144,6 +149,7 @@ void VendingMachine::adminInitialize() {
                 resetMachine();
                 break;
             default:
+                optionsFlag = false;
                 break;
         }
     }
@@ -274,6 +280,7 @@ void VendingMachine::cancelTransaction() {
     map<int, int> currMapProducts;
     currMapProducts = myCart->getItemsFromCart();
     prodCat->updateCatalog(currMapProducts);
+    myCart->emptyCart();
     std::cout << "!!!!! YOUR TRANSACTION IS CANCELLED !!!!!" << endl;
     initialize();
     return;
@@ -296,15 +303,24 @@ void VendingMachine::processTransaction(int refundPrice) {
 
 void VendingMachine::addProductsToCart() {
     int productId = 0, productQuantity = 0;
-    int flag = 0;
+    string flag = "";
+    int inputVal = 0;
     while (true) {
         productId = 0;
         productQuantity = 0;
-        flag = 0;
+        flag = "";
         cartOptions();
         
         cin >> flag;
-        if (flag == 1) {
+
+        try {
+            inputVal = stoi(flag);
+        }
+        catch(...) {
+            inputVal = 0;
+        }
+
+        if (inputVal == 1) {
             prodCat->displayProducts();
             std::cout << "Enter PRODUCT ID : ";
             cin >> productId;
@@ -326,7 +342,7 @@ void VendingMachine::addProductsToCart() {
             std::cout << "********************************" << endl;
             std::cout << endl;
         }
-        else if (flag == 2) {
+        else if (inputVal == 2) {
             map<int, int> mapProducts;
             map<int, int>::iterator iter;
             mapProducts = myCart->getItemsFromCart();
@@ -342,7 +358,7 @@ void VendingMachine::addProductsToCart() {
             }
             std::cout << endl;
         }
-        else if (flag == 3) {
+        else if (inputVal == 3) {
 
             if ((myCart->getItemsFromCart()).empty()) {
                 std::cout << "YOUR CART IS EMPTY" << endl;
@@ -357,6 +373,7 @@ void VendingMachine::addProductsToCart() {
             enterCash(totalPrice);
         }
         else {
+            cancelTransaction();
             break;
         }
     }
@@ -396,11 +413,6 @@ void VendingMachine::denominationOptions() {
     for (int i = 0; i < availableDenominations.size(); i++) {
         std::cout << " " << i+1 << "        --> " << availableDenominations[i] << endl;
     }
-    // std::cout << " 1        --> TEN_DOLLAR" << endl;
-    // std::cout << " 2        --> DOLLAR" << endl;
-    // std::cout << " 3        --> QUARTER" << endl;
-    // std::cout << " 4        --> DIME" << endl;
-    // std::cout << " 5        --> CENT" << endl;
     std::cout << " ANY KEY  --> CANCEL the TRANSACTION." << endl;
     std::cout << endl;
     std::cout << "YOUR INPUT : ";
@@ -415,17 +427,25 @@ void VendingMachine::resetMachine() {
 
 void VendingMachine::enterCash(int totalPrice) {
     int denominationValue = 0;
-    int flag = 0;
+    string flag = "";
     int enteredPrice = 0;
     string denominationType = "";
+    int inputVal = 0;
 
     while (true) {
-
+        flag = "";
         denominationValue = 0;
         paymentOptions();
         cin >> flag;
 
-        if (flag == 1) {
+        try {
+            inputVal = stoi(flag);
+        }
+        catch(...) {
+            inputVal = 0;
+        }
+
+        if (inputVal == 1) {
             denominationOptions();
             cin >> denominationValue;
             denominationType = denCat->getDenominationType(denominationValue);
@@ -435,7 +455,7 @@ void VendingMachine::enterCash(int totalPrice) {
             std::cout << "TOTAL AMOUNT ENTERED : " << (double)enteredPrice/100 << " USD" << endl;
             std::cout << endl;
         }
-        else if (flag == 2) {
+        else if (inputVal == 2) {
             if (enteredPrice < totalPrice) {
                 std::cout << "INSUFFICIENT AMOUNT. PLEASE ENTER THE CORRECT AMOUNT" << endl;
                 cout << endl;
