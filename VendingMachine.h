@@ -84,12 +84,13 @@ void VendingMachine::initialize() {
     if (input == 1) {
         adminUser = true;
         adminInitialize();
+        initialize();
     }
     else {
         adminUser = false;
         userInitialize();
     }
-    initialize();
+    
     return;
 }
 
@@ -334,7 +335,7 @@ void VendingMachine::addProductsToCart() {
             std::cout << "********************************************" << endl;
             for (iter = mapProducts.begin(); iter != mapProducts.end(); iter++) {
                 Product *currProduct = prodCat->getProduct(iter->first);
-                std::cout << currProduct->getProductName() << "\t\t" << " | " << currProduct->getProductPrice() << "\t\t" << " | "<< iter->second << endl;
+                std::cout << currProduct->getProductName() << "\t\t" << " | " << (double)currProduct->getProductPrice()/100 << "\t\t" << " | "<< iter->second << endl;
             }
             std::cout << endl;
         }
@@ -468,8 +469,8 @@ void VendingMachine::cartOptions() {
     else {
         std::cout << " 1        --> ADD an Item to the CART." << endl;
         std::cout << " 2        --> VIEW the items in the CART." << endl; 
-        std::cout  << " 3       --> CHECKOUT the CART." << endl;
-        std::cout  << " ANY KEY --> CANCEL the TRANSACTION." << endl;
+        std::cout << " 3        --> CHECKOUT the CART." << endl;
+        std::cout << " ANY KEY  --> CANCEL the TRANSACTION." << endl;
     }
     
     std::cout  << endl;

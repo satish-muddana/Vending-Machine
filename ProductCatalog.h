@@ -133,7 +133,7 @@ void ProductCatalog::displayProducts() {
     for (iter = productCnt.begin(); iter != productCnt.end(); iter++) {
         int productId = iter->first;
         Product *prod = mapProducts[productId];
-        std::cout << prod->getProductName() << "\t\t" << " | " << prod->getProductId() << "\t\t" << " | " << prod->getProductPrice() << "\t\t" << " | "<< iter->second << endl;
+        std::cout << prod->getProductName() << "\t\t" << " | " << prod->getProductId() << "\t\t" << " | " << (double)prod->getProductPrice()/100 << "\t\t" << " | "<< iter->second << endl;
     }
     std::cout << endl;
     return;
