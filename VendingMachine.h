@@ -438,7 +438,8 @@ void VendingMachine::enterCash(int totalPrice) {
         else if (flag == 2) {
             if (enteredPrice < totalPrice) {
                 std::cout << "INSUFFICIENT AMOUNT. PLEASE ENTER THE CORRECT AMOUNT" << endl;
-                cancelTransaction();
+                cout << endl;
+                continue;
             }
             else {
                 processTransaction(enteredPrice - totalPrice);
