@@ -422,7 +422,7 @@ void VendingMachine::denominationOptions() {
     std::cout << " ANY KEY  --> CANCEL the TRANSACTION." << endl;
     std::cout << endl;
     std::cout << "YOUR INPUT : ";
-
+    return;
 }
 
 void VendingMachine::resetMachine() {
