@@ -218,6 +218,7 @@ void VendingMachine::addProductsToCatalog() {
 
     Product *currProduct = new Product(productId, productName, productPrice);
     prodCat->addProducts(currProduct, productQuantity);
+    return;
 }
 
 void VendingMachine::addDenominations() {
@@ -234,6 +235,7 @@ void VendingMachine::addDenominations() {
 
 void VendingMachine::emptyDenominations() {
     denCat->emptyDenominations();
+    return;
 }
 
 void VendingMachine::removeDenominations() {
@@ -253,6 +255,7 @@ void VendingMachine::userInitialize() {
     map<int, int> checkOutProducts;
     prodCat->displayProducts();
     addProductsToCart();
+    return;
 }
 
 bool VendingMachine::processRefund(int refundPrice) {
@@ -493,7 +496,7 @@ void VendingMachine::cartOptions() {
         std::cout << " 6        --> REMOVE DENOMINATIONS." << endl;
         std::cout << " 7        --> EMPTY DENOMINATIONS." << endl;
         std::cout << " 8        --> SHOW DENOMINATIONS." << endl;
-        std::cout << " 9        --> REMOVE DENOMINATION TYPES." << endl;
+        std::cout << " 9        --> ADD DENOMINATION TYPES." << endl;
         std::cout << " 10       --> REMOVE DENOMINATION TYPES." << endl;
         std::cout << " 11       --> RESET MACHINE." << endl;
         std::cout << " ANY KEY  --> CANCEL." << endl;
